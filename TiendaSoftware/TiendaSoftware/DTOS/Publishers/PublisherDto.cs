@@ -1,24 +1,18 @@
-﻿using TiendaSoftware.API.Database.Entities;
+﻿using TiendaSoftware.DataBase.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using TiendaSoftware.DTOS.Publishers;
 
-namespace TiendaSoftware.API.DTOS.Publishers
+namespace TiendaSoftware.DTOS.Publishers
 {
     public class PublisherDto
-    {
-       
-        public string Title { get; set; }
+    {	
+        public Guid Id { get; set; }
+        public string Name { get; set; }
 
-        public string AuthorId { get; set; }
-        // cambiar AuthoId por UserDto
+        public string Description { get; set; }
 
-        public DateTime PublicationDate { get; set; }
+        public string Securitycode { get; set; }
 
-        public virtual CategoryDto Category { get; set; }
-
-        public string Content { get; set; }
-
-        public virtual List<string> Tags { get; set; }
-    }
+      }
 }

@@ -1,6 +1,8 @@
 ﻿namespace TiendaSoftware.Services.Interfaces
 {
-    public interface IUserService
+    public interface IAuthService
     {
+        string GetUserId();
     }
 }
+

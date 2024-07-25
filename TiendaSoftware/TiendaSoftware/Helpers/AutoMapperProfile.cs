@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using TiendaSoftware.DataBase.Entities;
-using TiendaSoftware.DTOS.Categories;
-using TiendaSoftware.API.DTOS.Posts;
+using TiendaSoftware.DTOS.Publishers;
 
 namespace TiendaSoftware.Helpers
 {
@@ -9,22 +8,17 @@ namespace TiendaSoftware.Helpers
     {
         public AutoMapperProfile()
         {
-            MapsForCategories();
-            MapsForPosts();
+            MapsForPublishers();
+            
         }
 
-        private void MapsForCategories()
+        private void MapsForPublishers()
         {
-            CreateMap<CategoryEntity, CategoryDto>();
-            CreateMap<CategoryCreateDto, CategoryEntity>();
-            CreateMap<CategoryEditDto, CategoryEntity>();
+            CreateMap<PublisherEntity, PublisherDto>();
+            CreateMap<PublisherCreateDto, PublisherEntity>();
+            CreateMap<PublisherEditDto, PublisherEntity>();
         }
 
-        private void MapsForPosts() 
-        {
-            CreateMap<PostEntity, PostDto>().ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags.Select(pt => pt.Tag.Name).ToList()));
-            CreateMap<PostCreaDto, PostEntity>();
-            CreateMap<PostEditDto, PostEntity>();
-        }
+        
     }
 }

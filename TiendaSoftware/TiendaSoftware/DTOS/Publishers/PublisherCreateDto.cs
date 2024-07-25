@@ -8,24 +8,24 @@ namespace TiendaSoftware.DTOS.Publishers
 {
     public class PublisherCreateDto
     {
-        [Display(Name = "Titulo")]
-        [StringLength(100, ErrorMessage = " El {0} debe tener menos de {1}")]
-        [Required(ErrorMessage = "El {0} es requerido.")]
-        public string Title { get; set; }
+       // public Guid Id { get; set; }
 
-        // TODO: DEFINIR LA RELACION ENTRE USUARIOS Y POST
-        [Display(Name = "Autor")]
-        [StringLength(100, ErrorMessage = "El {0} no puede tener mas de{1}.")]
-        [Required(ErrorMessage = "El {0} es requerido.")]
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El {0} de la categoría es requerido.")]
+        public string Name { get; set; }
 
-        public string AuthorId { get; set; }
+        [Display(Name = "Descripción")]
+        [StringLength(250)]
+        [MinLength(10, ErrorMessage = "La {0} debe tener al menos {1} caracteres.")]
+        public string Description { get; set; }
 
-        public DateTime PublicationDate { get; set; }
+        [Display(Name = "Datos bancarios")]
+        [StringLength(12)] 
+        [MinLength(12, ErrorMessage = "Los {0} debe tener al menos {1} caracteres.")]
+        [Required(ErrorMessage = "Los {0} de la categoría es requerido.")]
 
-        public Guid CategoryId { get; set; }
+        public string Securitycode { get; set; }
 
-        public string Content { get; set; }
-
-        public virtual List<string> Tags { get; set; }
+     
     }
 }

@@ -26,7 +26,7 @@ namespace TiendaSoftware
             services.AddDbContext<TiendaSoftwareContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Add custom services
-            services.AddTransient<IUserService, CategoriesSQLService>(); // servicio de categorias
+            services.AddTransient<IPublisherService, PublisherService>(); // servicio de categorias
             services.AddTransient<IAuthService, AuthService>(); // servicio de autentificacion
 
             // Add AutoMapper
