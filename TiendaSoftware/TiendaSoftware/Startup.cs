@@ -4,6 +4,7 @@ using TiendaSoftware.Services;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using BlogUNAH.API.Services;
 
 namespace TiendaSoftware
 {
@@ -26,7 +27,8 @@ namespace TiendaSoftware
             services.AddDbContext<TiendaSoftwareContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Add custom services
-            services.AddTransient<IPublisherService, PublisherService>(); // servicio de categorias
+            services.AddTransient<IPublisherService, PublisherService>();
+            services.AddTransient<ISoftwaresService, SoftwaresService>();
             services.AddTransient<IAuthService, AuthService>(); // servicio de autentificacion
 
             // Add AutoMapper

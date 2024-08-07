@@ -30,8 +30,8 @@ namespace TiendaSoftware.DataBase.Entities
         public virtual PublisherEntity Desarrollador { get; set; }
 
 
-        public virtual IEnumerable<UserDownloadsEntity> Usuarios { get; set; }
+        //public virtual IEnumerable<UserDownloadsEntity> Usuarios { get; set; }
         public virtual IEnumerable<SoftwareTagsEntity> Tags { get; set; }
-        public virtual IEnumerable<ListSoftwareEntity> Listas { get; set; }   
+        //public virtual IEnumerable<ListSoftwareEntity> Listas { get; set; }   
     }
 }

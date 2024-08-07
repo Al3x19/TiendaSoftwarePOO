@@ -42,7 +42,7 @@ namespace TiendaSoftware.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ResponseDto<List<PublisherDto>>>> Edit(PublisherEditDto dto, Guid id)
         {
             var response = await _publishersService.EditAsync(dto, id);
