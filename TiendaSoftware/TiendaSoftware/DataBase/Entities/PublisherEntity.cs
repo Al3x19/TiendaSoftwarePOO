@@ -1,14 +1,14 @@
-﻿﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using TiendaSoftware.DataBase.Entities;
 
 namespace TiendaSoftware.DataBase.Entities
 {
-	    [Table("publishers", Schema = "dbo")]
+    [Table("publishers", Schema = "dbo")]
     public class PublisherEntity : BaseEntity
     {
-		[Display(Name = "Nombre")]
+        [Display(Name = "Nombre")]
         [Required(ErrorMessage = "El {0} de la categoría es requerido.")]
         [StringLength(50)]
         [Column("name")]
@@ -27,7 +27,7 @@ namespace TiendaSoftware.DataBase.Entities
         public string Securitycode { get; set; }
 
         public virtual IEnumerable<SoftwareEntity> Software { get; set; }
-       
-	    
+
+
     }
 }

@@ -13,7 +13,7 @@ namespace TiendaSoftware.DataBase.Entities
         [StringLength(100)]
         [Column("created_by")]
 
-        
+
         public string CreatedBy { get; set; }
         [Column("created_date")]
 

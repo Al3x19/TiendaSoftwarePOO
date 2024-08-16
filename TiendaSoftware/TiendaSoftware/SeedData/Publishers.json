@@ -1,6 +1,47 @@
-[
+﻿[
   {
-
+    "Name": "Tech Innovations Inc.",
+    "Description": "A large technology company known for its cutting-edge software solutions and extensive development team.",
+    "Securitycode": "BANK-TII-123456"
+  },
+  {
+    "Name": "Creative Solutions Ltd.",
+    "Description": "A well-established company specializing in creative software solutions and innovative technology products.",
+    "Securitycode": "BANK-CSL-654321"
+  },
+  {
+    "Name": "GreenTech Development",
+    "Description": "A technology company focusing on sustainable and eco-friendly software solutions with a dedicated development team.",
+    "Securitycode": "BANK-GTD-789012"
+  },
+  {
+    "Name": "Laura Roberts",
+    "Description": "An independent software developer working on various freelance projects, known for expertise in web development.",
+    "Securitycode": "BANK-LRO-321098"
+  },
+  {
+    "Name": "James Walker",
+    "Description": "A solo entrepreneur managing a software startup, handling all aspects from development to business operations.",
+    "Securitycode": "BANK-JWA-210987"
+  },
+  {
+    "Name": "Samantha Green",
+    "Description": "A freelance specialist providing consulting and development services, offering high-level expertise to clients on a contract basis.",
+    "Securitycode": "BANK-SGR-456789"
+  },
+  {
+    "Name": "Alpha Tech Solutions",
+    "Description": "A dynamic startup focusing on innovative software products and rapid development, known for its agile approach and creative solutions.",
+    "Securitycode": "BANK-ATS-987654"
+  },
+  {
+    "Name": "Benjamin Lee",
+    "Description": "An open source contributor working with global communities to improve and expand open source projects and software.",
+    "Securitycode": "BANK-BLE-567890"
+  },
+  {
+    "Name": "Sophia Turner",
+    "Description": "A part-time developer balancing work on various projects with other commitments, contributing to both personal and professional software developments.",
+    "Securitycode": "BANK-STU-654321"
   }
-
 ]

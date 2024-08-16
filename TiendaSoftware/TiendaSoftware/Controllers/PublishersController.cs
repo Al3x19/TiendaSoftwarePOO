@@ -12,14 +12,14 @@ namespace TiendaSoftware.Controllers
     {
         private readonly IPublisherService _publishersService;
 
-        public List<PublisherEntity> _publishers {get; set; }
+        public List<PublisherEntity> _publishers { get; set; }
 
-        public PublishersController(IPublisherService publishersService) 
+        public PublishersController(IPublisherService publishersService)
         {
             this._publishersService = publishersService;
         }
         [HttpGet]
-        public async Task<ActionResult<ResponseDto<List<PublisherDto>>>> GetAll() 
+        public async Task<ActionResult<ResponseDto<List<PublisherDto>>>> GetAll()
         {
             var response = await _publishersService.GetPublishersListAsync();
 
@@ -27,16 +27,16 @@ namespace TiendaSoftware.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ResponseDto<PublisherDto>>> Get( Guid  id)
+        public async Task<ActionResult<ResponseDto<PublisherDto>>> Get(Guid id)
         {
             var response = await _publishersService.GetPublisherByIdAsync(id);
 
             return StatusCode(response.StatusCode, response);
         }
         [HttpPost]
-        public async Task<ActionResult<ResponseDto<PublisherDto>>> Create(PublisherCreateDto dto) 
+        public async Task<ActionResult<ResponseDto<PublisherDto>>> Create(PublisherCreateDto dto)
         {
-            var response = await _publishersService.CreateAsync( dto);
+            var response = await _publishersService.CreateAsync(dto);
 
             return StatusCode(response.StatusCode, response);
 
@@ -47,11 +47,11 @@ namespace TiendaSoftware.Controllers
         {
             var response = await _publishersService.EditAsync(dto, id);
 
-            return StatusCode(response.StatusCode, response);   
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseDto<PublisherDto>>> Delete(Guid id) 
+        public async Task<ActionResult<ResponseDto<PublisherDto>>> Delete(Guid id)
         {
             var category = await _publishersService.GetPublisherByIdAsync(id);
             var response = await _publishersService.DeleteAsync(id);

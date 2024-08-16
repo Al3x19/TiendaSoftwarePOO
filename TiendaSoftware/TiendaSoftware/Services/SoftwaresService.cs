@@ -12,7 +12,6 @@ namespace BlogUNAH.API.Services
     public class SoftwaresService : ISoftwaresService
     {
         private readonly TiendaSoftwareContext _context;
-        private readonly IAuthService _authService;
         private readonly ILogger<SoftwaresService> _logger;
         private readonly IMapper _mapper;
         private readonly int PAGE_SIZE;
@@ -20,7 +19,6 @@ namespace BlogUNAH.API.Services
         public SoftwaresService(TiendaSoftwareContext context, IAuthService authService, ILogger<SoftwaresService> logger, IMapper mapper, IConfiguration configuration)
         {
             this._context = context;
-            this._authService = authService;
             this._logger = logger;
             this._mapper = mapper;
             PAGE_SIZE = configuration.GetValue<int>("PageSize");
@@ -34,7 +32,7 @@ namespace BlogUNAH.API.Services
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                softwareEntityQuery = softwareEntityQuery.Where( x => (x.Name + " " + x.Desarrollador.Name + " " + x.Description).ToLower().Contains(searchTerm.ToLower()));
+                softwareEntityQuery = softwareEntityQuery.Where(x => (x.Name + " " + x.Desarrollador.Name + " " + x.Description).ToLower().Contains(searchTerm.ToLower()));
             }
 
             int totalSoftware = await softwareEntityQuery.CountAsync();
@@ -51,8 +49,8 @@ namespace BlogUNAH.API.Services
                 Message = MessagesConstant.RECORDS_FOUND,
                 Data = new PaginationDto<List<SoftwareDto>>
                 {
-                    CurrentPage = page, 
-                    PageSize  = PAGE_SIZE,
+                    CurrentPage = page,
+                    PageSize = PAGE_SIZE,
                     TotalItems = totalSoftware,
                     TotalPages = totalPages,
                     Items = softwareDto,
@@ -64,7 +62,7 @@ namespace BlogUNAH.API.Services
 
         public async Task<ResponseDto<SoftwareDto>> GetByIdAsync(Guid id)
         {
-            var softwareEntity = await _context.Software.Include(x => x.Desarrollador).Include(x => x.Tags).ThenInclude( x => x.tags).FirstOrDefaultAsync(x => x.Id == id);
+            var softwareEntity = await _context.Software.Include(x => x.Desarrollador).Include(x => x.Tags).ThenInclude(x => x.tags).FirstOrDefaultAsync(x => x.Id == id);
 
             if (softwareEntity is null)
             {
@@ -106,7 +104,7 @@ namespace BlogUNAH.API.Services
                     var newTagNames = dto.TagList.Except(existingTags.Select(t => t.Name)).ToList();
 
                     // Crear los nuevos tags
-                    var newTags = newTagNames.Select(name  => new TagEntity
+                    var newTags = newTagNames.Select(name => new TagEntity
                     {
                         Name = name,
                     }).ToList();
@@ -202,7 +200,7 @@ namespace BlogUNAH.API.Services
 
                     var allTags = existingTags.Concat(newTags).ToList();
 
-                    // Agregar tags a la tabla post_tags
+                    // Agregar tags a la tabla Software_tags
                     var softwareTagsNew = allTags.Select(t => new SoftwareTagsEntity
                     {
                         SoftwareId = softwareEntity.Id,
@@ -262,7 +260,7 @@ namespace BlogUNAH.API.Services
                     return new ResponseDto<SoftwareDto>
                     {
                         StatusCode = 200,
-                        Status= true,
+                        Status = true,
                         Message = MessagesConstant.DELETE_SUCCESS
                     };
                 }

@@ -19,7 +19,7 @@ namespace TiendaSoftware.DTOS.Softwares
 
         public virtual PublisherDto Desarrollador { get; set; }
 
-        public List<string> Tags { get; set; } 
+        public List<string> Tags { get; set; }
 
 
     }

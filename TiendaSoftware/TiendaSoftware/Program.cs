@@ -1,10 +1,6 @@
 using TiendaSoftware;
 using TiendaSoftware.DataBase;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.OpenApi.Writers;
-using TiendaSoftware.Helpers;
-using TiendaSoftware.Services.Interfaces;
-using TiendaSoftware.DataBase.Entities;
+
 
 
 var builder = WebApplication.CreateBuilder(args);

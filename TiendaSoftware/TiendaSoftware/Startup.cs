@@ -12,12 +12,12 @@ namespace TiendaSoftware
     {
         private IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration )
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public void configureServices(IServiceCollection services) 
+        public void configureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
@@ -29,6 +29,8 @@ namespace TiendaSoftware
             // Add custom services
             services.AddTransient<IPublisherService, PublisherService>();
             services.AddTransient<ISoftwaresService, SoftwaresService>();
+            services.AddTransient<IListsService, ListsService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuthService, AuthService>(); // servicio de autentificacion
 
             // Add AutoMapper
@@ -36,7 +38,7 @@ namespace TiendaSoftware
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -49,7 +51,7 @@ namespace TiendaSoftware
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => 
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });

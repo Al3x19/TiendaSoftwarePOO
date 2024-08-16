@@ -6,11 +6,11 @@ using TiendaSoftware.DataBase.Entities;
 
 namespace TiendaSoftware.DataBase.Entities
 {
-	[Table("lists", Schema = "dbo")]
+    [Table("lists", Schema = "dbo")]
     public class ListEntity : BaseEntity
     {
-		    
-		[Display(Name = "Nombre")]
+
+        [Display(Name = "Nombre")]
         [Required(ErrorMessage = "El {0} de la categoría es requerido.")]
         [StringLength(50)]
         [Column("name")]
@@ -28,6 +28,6 @@ namespace TiendaSoftware.DataBase.Entities
         [ForeignKey(nameof(UserId))]
         public virtual UserEntity Creator { get; set; }
 
-        public virtual IEnumerable<ListSoftwareEntity> Software { get; set; }
+        public virtual IEnumerable<ListSoftwareEntity> Softwares { get; set; }
     }
 }

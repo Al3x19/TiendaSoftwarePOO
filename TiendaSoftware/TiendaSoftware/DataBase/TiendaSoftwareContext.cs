@@ -1,4 +1,4 @@
-﻿﻿using TiendaSoftware.DataBase.Entities;
+﻿using TiendaSoftware.DataBase.Entities;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

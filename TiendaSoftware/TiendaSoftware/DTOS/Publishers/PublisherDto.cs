@@ -6,7 +6,7 @@ using TiendaSoftware.DTOS.Publishers;
 namespace TiendaSoftware.DTOS.Publishers
 {
     public class PublisherDto
-    {	
+    {
         public Guid Id { get; set; }
         public string Name { get; set; }
 
@@ -14,5 +14,5 @@ namespace TiendaSoftware.DTOS.Publishers
 
         public string Securitycode { get; set; }
 
-      }
+    }
 }

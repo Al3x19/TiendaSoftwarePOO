@@ -1,0 +1,58 @@
+﻿[
+  {
+    "name": "Productivity Suite",
+    "description": "Comprehensive software packages designed to boost productivity, including word processors, spreadsheets, and presentation tools."
+  },
+  {
+    "name": "Antivirus",
+    "description": "Software specifically for detecting, preventing, and removing malware and viruses."
+  },
+  {
+    "name": "IDE",
+    "description": "Integrated Development Environment software that provides comprehensive facilities to programmers for software development."
+  },
+  {
+    "name": "Graphic Design",
+    "description": "Software used for creating and editing visual content such as images and illustrations."
+  },
+  {
+    "name": "Video Conferencing",
+    "description": "Software that enables real-time video communication and collaboration over the internet."
+  },
+  {
+    "name": "Database Management System",
+    "description": "Software used to manage and interact with databases, including relational and NoSQL databases."
+  },
+  {
+    "name": "Cloud Storage",
+    "description": "Services that provide online data storage accessible from anywhere via the internet."
+  },
+  {
+    "name": "Game Engine",
+    "description": "Software frameworks used for developing video games, providing tools for graphics, physics, and game logic."
+  },
+  {
+    "name": "System Utility",
+    "description": "Software designed to manage and tune computer hardware and software, such as disk cleanup tools and system optimizers."
+  },
+  {
+    "name": "Educational Software",
+    "description": "Applications designed to facilitate learning and teaching through interactive content and tools."
+  },
+  {
+    "name": "Addon",
+    "description": "Supplementary software that extends the functionality of existing programs or games."
+  },
+  {
+    "name": "Simulation",
+    "description": "Software that models real-world processes or systems for analysis, training, or entertainment."
+  },
+  {
+    "name": "Video Game",
+    "description": "Interactive entertainment software designed for gaming, including genres like action, strategy, and role-playing."
+  },
+  {
+    "name": "Productivity Tool",
+    "description": "Specific tools aimed at enhancing productivity, such as task managers and calendar applications."
+  }
+]

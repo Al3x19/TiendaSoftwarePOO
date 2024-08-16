@@ -1,3 +1,85 @@
-[
-
+﻿[
+  {
+    "Name": "Productivity Master",
+    "Description": "A comprehensive software package designed to boost productivity, including word processors, spreadsheets, and presentation tools.",
+    "Price": 149.99,
+    "Publisher": "Tech Innovations Inc.",
+    "Tags": [
+      "Productivity Suite",
+      "Productivity Tool"
+    ]
+  },
+  {
+    "Name": "Design Pro Studio",
+    "Description": "Professional software for creating and editing visual content such as images and illustrations.",
+    "Price": 299.99,
+    "Publisher": "Creative Solutions Ltd.",
+    "Tags": [
+      "Graphic Design"
+    ]
+  },
+  {
+    "Name": "Secure Cloud Storage",
+    "Description": "Advanced cloud storage service providing secure and scalable online data storage accessible from anywhere.",
+    "Price": 99.99,
+    "Publisher": "GreenTech Development",
+    "Tags": [
+      "Cloud Storage"
+    ]
+  },
+  {
+    "Name": "Web Dev IDE",
+    "Description": "An integrated development environment tailored for web development, featuring tools and utilities for efficient programming.",
+    "Price": 129.99,
+    "Publisher": "Laura Roberts",
+    "Tags": [
+      "IDE"
+    ]
+  },
+  {
+    "Name": "Ultimate Game Engine",
+    "Description": "A comprehensive game engine framework for developing video games, including tools for graphics, physics, and game logic.",
+    "Price": 499.99,
+    "Publisher": "James Walker",
+    "Tags": [
+      "Game Engine",
+      "Simulation"
+    ]
+  },
+  {
+    "Name": "SafeGuard Antivirus",
+    "Description": "Software designed to detect, prevent, and remove malware and viruses, ensuring comprehensive protection for your system.",
+    "Price": 49.99,
+    "Publisher": "Samantha Green",
+    "Tags": [
+      "Antivirus"
+    ]
+  },
+  {
+    "Name": "Connect Pro Video Conferencing",
+    "Description": "A versatile video conferencing tool for real-time communication and collaboration over the internet, suitable for personal and professional use.",
+    "Price": 89.99,
+    "Publisher": "Alpha Tech Solutions",
+    "Tags": [
+      "Video Conferencing"
+    ]
+  },
+  {
+    "Name": "EduTech Learning Suite",
+    "Description": "A suite of applications designed to facilitate learning and teaching through interactive content and tools.",
+    "Price": 79.99,
+    "Publisher": "Benjamin Lee",
+    "Tags": [
+      "Educational Software"
+    ]
+  },
+  {
+    "Name": "Optimizer Utility Pro",
+    "Description": "A system utility tool designed to manage and optimize computer hardware and software, including disk cleanup and system optimization features.",
+    "Price": 59.99,
+    "Publisher": "Sophia Turner",
+    "Tags": [
+      "System Utility"
+    ]
+  }
 ]

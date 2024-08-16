@@ -17,7 +17,7 @@ namespace TiendaSoftware.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -30,6 +30,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -39,6 +40,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("created_date");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)")
                         .HasColumnName("description");
@@ -50,6 +52,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("name");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -77,6 +80,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -94,6 +98,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("Software_id");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -119,6 +124,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -128,6 +134,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("created_date");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)")
                         .HasColumnName("description");
@@ -145,6 +152,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("securitycode");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -166,11 +174,13 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)")
                         .HasColumnName("content");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -179,21 +189,15 @@ namespace TiendaSoftware.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("created_date");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("name");
-
                     b.Property<int>("Score")
-                        .HasColumnType("int")
-                        .HasColumnName("score");
+                        .HasColumnType("int");
 
                     b.Property<Guid>("SoftwareId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("software_id");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -223,6 +227,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -232,6 +237,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("created_date");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)")
                         .HasColumnName("description");
@@ -251,6 +257,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("Publisher_id");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -274,6 +281,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -291,6 +299,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("Tag_id");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -316,6 +325,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -325,6 +335,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("created_date");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)")
                         .HasColumnName("description");
@@ -336,6 +347,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("name");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -357,6 +369,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -370,6 +383,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("Software_id");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -399,6 +413,7 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("created_by");
@@ -413,7 +428,14 @@ namespace TiendaSoftware.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");
 
+                    b.Property<string>("Securitycode")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)")
+                        .HasColumnName("securitycode");
+
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("updated_by");
@@ -430,7 +452,7 @@ namespace TiendaSoftware.Migrations
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.ListEntity", b =>
                 {
                     b.HasOne("TiendaSoftware.DataBase.Entities.UserEntity", "Creator")
-                        .WithMany("Listas")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -441,13 +463,13 @@ namespace TiendaSoftware.Migrations
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.ListSoftwareEntity", b =>
                 {
                     b.HasOne("TiendaSoftware.DataBase.Entities.ListEntity", "List")
-                        .WithMany("Software")
+                        .WithMany("Softwares")
                         .HasForeignKey("ListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TiendaSoftware.DataBase.Entities.SoftwareEntity", "Software")
-                        .WithMany("Listas")
+                        .WithMany()
                         .HasForeignKey("SoftwareId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -466,7 +488,7 @@ namespace TiendaSoftware.Migrations
                         .IsRequired();
 
                     b.HasOne("TiendaSoftware.DataBase.Entities.UserEntity", "Creator")
-                        .WithMany("Reseñas")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -496,7 +518,7 @@ namespace TiendaSoftware.Migrations
                         .IsRequired();
 
                     b.HasOne("TiendaSoftware.DataBase.Entities.TagEntity", "tags")
-                        .WithMany("Software")
+                        .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -509,7 +531,7 @@ namespace TiendaSoftware.Migrations
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.UserDownloadsEntity", b =>
                 {
                     b.HasOne("TiendaSoftware.DataBase.Entities.SoftwareEntity", "Software")
-                        .WithMany("Usuarios")
+                        .WithMany()
                         .HasForeignKey("SoftwareId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -527,7 +549,7 @@ namespace TiendaSoftware.Migrations
 
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.ListEntity", b =>
                 {
-                    b.Navigation("Software");
+                    b.Navigation("Softwares");
                 });
 
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.PublisherEntity", b =>
@@ -537,25 +559,12 @@ namespace TiendaSoftware.Migrations
 
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.SoftwareEntity", b =>
                 {
-                    b.Navigation("Listas");
-
                     b.Navigation("Tags");
-
-                    b.Navigation("Usuarios");
-                });
-
-            modelBuilder.Entity("TiendaSoftware.DataBase.Entities.TagEntity", b =>
-                {
-                    b.Navigation("Software");
                 });
 
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.UserEntity", b =>
                 {
                     b.Navigation("Compras");
-
-                    b.Navigation("Listas");
-
-                    b.Navigation("Reseñas");
                 });
 #pragma warning restore 612, 618
         }
