@@ -62,9 +62,9 @@ namespace BlogUNAH.API.Services
 
         public async Task<ResponseDto<ListDto>> GetByIdAsync(Guid id)
         {
-            var ListEntity = await _context.Lists.Include(x => x.Creator).Include(x => x.Softwares).ThenInclude(x => x.Software).FirstOrDefaultAsync(x => x.Id == id);
+            var listEntity = await _context.Lists.Include(x => x.Creator).Include(x => x.Softwares).ThenInclude(x => x.Software).FirstOrDefaultAsync(x => x.Id == id);
 
-            if (ListEntity is null)
+            if (listEntity is null)
             {
                 return new ResponseDto<ListDto>
                 {
@@ -98,30 +98,14 @@ namespace BlogUNAH.API.Services
                     await _context.SaveChangesAsync();
 
 
-                    var existingsoft = await _context.Software.Where(t => dto.Softwares.Contains(t.Name)).ToListAsync();
+                    var existingsoft = await _context.Software.Where(t => dto.SoftwaresList.Contains(t.Name)).ToListAsync();
 
-                    existingsoft.ForEach(x =>
-                    {
-                        var i = 0;
-                        _context.Software.ForEachAsync(t =>
+                     if (existingsoft.Count() != dto.SoftwaresList.Count())
                         {
-
-                            if (t.Name == x.Name)
-                            {
-                                i++;
-                            }
-
-
-                        });
-
-                        if (i > 0)
-                        {
-                            throw new Exception("Error, se intento agregar un producto no existente");
+                        throw new Exception("Error, se intento agregar un producto no existente");
                         }
-                    });
 
 
-                    // Combinar tags existentes y nuevoso.Softwares.Contains(t.Name));
 
 
                     var listSoftwaresEntity = existingsoft.Select(t => new ListSoftwareEntity
@@ -134,8 +118,6 @@ namespace BlogUNAH.API.Services
                     await _context.SaveChangesAsync();
 
                     //throw new Exception("Error"); Aqui no deberia de guardar nada cuand esta comentado
-
-
                     await transaction.CommitAsync();
 
 
@@ -166,53 +148,21 @@ namespace BlogUNAH.API.Services
             {
                 try
                 {
-                    var ListEntity = await _context.Lists.FindAsync(id);
+                    var ListEntity = _mapper.Map<ListEntity>(dto);
 
-                    if (ListEntity is null)
-                    {
-                        return new ResponseDto<ListDto>
-                        {
-                            StatusCode = 404,
-                            Status = false,
-                            Message = $"{MessagesConstant.RECORD_NOT_FOUND} {id}"
-                        };
-                    }
-
-                    _mapper.Map(dto, ListEntity);
 
                     _context.Lists.Update(ListEntity);
                     await _context.SaveChangesAsync();
 
-                    // Eliminar tags anteriores 
-                    var existingListSoftwares = await _context.SoftwareLists.Where(t => t.ListId == id).ToListAsync();
 
-                    _context.RemoveRange(existingListSoftwares);
-                    await _context.SaveChangesAsync();
+                    var existingsoft = await _context.Software.Where(t => dto.SoftwaresList.Contains(t.Name)).ToListAsync();
 
-                    var existingsoft = await _context.Software.Where(t => dto.Softwares.Contains(t.Name)).ToListAsync();
-
-                    existingsoft.ForEach(x =>
+                    if (existingsoft.Count() != dto.SoftwaresList.Count())
                     {
-                        var i = 0;
-                        _context.Software.ForEachAsync(t =>
-                        {
-
-                            if (t.Name == x.Name)
-                            {
-                                i++;
-                            }
+                        throw new Exception("Error, se intento agregar un producto no existente");
+                    }
 
 
-                        });
-
-                        if (i > 0)
-                        {
-                            throw new Exception("Error, se intento agregar un producto no existente");
-                        }
-                    });
-
-
-                    // Combinar tags existentes y nuevoso.Softwares.Contains(t.Name));
 
 
                     var listSoftwaresEntity = existingsoft.Select(t => new ListSoftwareEntity
@@ -221,31 +171,28 @@ namespace BlogUNAH.API.Services
                         SoftwareId = t.Id,
                     }).ToList();
 
-
                     _context.SoftwareLists.AddRange(listSoftwaresEntity);
                     await _context.SaveChangesAsync();
 
-                    //throw new Exception("Error para validar el rollback");
-
                     await transaction.CommitAsync();
+
 
                     return new ResponseDto<ListDto>
                     {
-                        StatusCode = 200,
+                        StatusCode = 201,
                         Status = true,
-                        Message = MessagesConstant.UPDATE_SUCCESS
+                        Message = MessagesConstant.CREATE_SUCCESS,
                     };
-
                 }
                 catch (Exception e)
                 {
                     await transaction.RollbackAsync();
-                    _logger.LogError(e, MessagesConstant.UPDATE_ERROR);
+                    _logger.LogError(e, MessagesConstant.CREATE_ERROR);
                     return new ResponseDto<ListDto>
                     {
                         StatusCode = 500,
                         Status = false,
-                        Message = MessagesConstant.UPDATE_ERROR
+                        Message = MessagesConstant.CREATE_ERROR,
                     };
                 }
             }

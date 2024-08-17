@@ -1,35 +1,14 @@
 import React from "react";
 import img from "./assets/img.webp";
+import {Header} from "./components/"
 
 function App() {
   return (
     <div className="bg-white w-full  flex flex-col items-center content-center ">
       {/* Inicio del Header */},
-      <div className="w-full h-20 px-4 py-4 border-b-[4px] border-solid border-black">
-        <header className="flex items-center justify-between mx-auto ">
-          <div className="text-gray-500 font-bold text-left text-2xl mx-2">
-            <p className="w-full">Tienda-Software</p>
-          </div>
-          <div className="container flex flex-col items-center ml-auto ">
-            <nav className="space-y-10 ml-auto hover:bg-white">
-              <ul>
-                <li>
-                  <a href="#" className="px-2 ">
-                    Software free
-                  </a>
-                  <a href="#" className="px-2 ">
-                    contactenos
-                  </a>
-                  <a href="#" className="px-2 ">
-                    messi
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </header>
-      </div>
-      {/* Fin del Header */},{/*contenido */}
+      <Header/>
+      {/* Fin del Header */},
+      {/*contenido */}
       <div className="w-full h-auto bg-gray-100 px-4 py-10 flex justify-center">
         <div className="max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8">
           

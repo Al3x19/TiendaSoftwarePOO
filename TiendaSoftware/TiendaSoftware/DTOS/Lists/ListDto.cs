@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using TiendaSoftware.DTOS.Users;
 
 
 namespace TiendaSoftware.DTOS.Lists
@@ -19,9 +20,9 @@ namespace TiendaSoftware.DTOS.Lists
         [StringLength(500)]
         public string Description { get; set; }
 
-        public Guid UserId { get; set; }
+        public UserDto User { get; set; }
 
-        public List<Guid> Softwares { get; set; }
+        public List<string> Softwares { get; set; }
 
     }
 }

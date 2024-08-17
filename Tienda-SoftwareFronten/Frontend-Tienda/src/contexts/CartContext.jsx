@@ -1,10 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 
 // crear el contexto
-export const createContext = createContext();
+export const CartContext = createContext();
 
 const cardProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [itemAmount, setItemAmount] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const total = cart.reduce((accumulator, currentItem) => {
@@ -53,6 +55,46 @@ const cardProvider = ({ children }) => {
   const clearCart = () => {
     setCart([]);
   };
+
+  //incrementar cantidad de producto
+  const increaseAmount = (id) => {
+    const cartItem = cart.find((id) => item.id === id);
+    addToCart(cartItem, id);
+  };
+  // decrementar cantidad de producto
+
+  const decreaseAmount = (id) => {
+    const cartItem = cart.find((id) => item.id === id);
+    if (cartItem) {
+      const newCart = cart.map((item) => {
+        if (item.id === id) {
+          return { ...item, amount: cartItem.amount - 1 };
+        } else {
+          return item;
+        }
+      });
+      setCart(newCart);
+    }
+    if (cartItem.amount < 2) {
+      removeFromCart(id);
+    }
+  };
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        increaseAmount,
+        decreaseAmount,
+        itemAmount,
+        total,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export default cardProvider;

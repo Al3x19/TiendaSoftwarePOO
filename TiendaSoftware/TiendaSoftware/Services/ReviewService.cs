@@ -6,6 +6,8 @@ using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using TiendaSoftware.DTOS.Users;
+using TiendaSoftware.Constansts;
+using TiendaSoftware.DTOS.Lists;
 
 namespace TiendaSoftware.Services
 {
@@ -60,8 +62,8 @@ namespace TiendaSoftware.Services
         }
         public async Task<ResponseDto<ReviewDto>> GetByIdAsync(Guid id)
         {
-            var ReviewEntity = await _context.Reviews.FirstOrDefaultAsync(c => c.Id == id);
-            if (ReviewEntity == null)
+            var reviewEntity = await _context.Reviews.FirstOrDefaultAsync(c => c.Id == id);
+            if (reviewEntity == null)
             {
                 return new ResponseDto<ReviewDto>
                 {
@@ -70,40 +72,62 @@ namespace TiendaSoftware.Services
                     Message = "No se encontro el registro.",
                 };
             }
-            var ReviewDto = _mapper.Map<ReviewDto>(ReviewEntity);
+            var reviewDto = _mapper.Map<ReviewDto>(reviewEntity);
 
             return new ResponseDto<ReviewDto>
             {
                 StatusCode = 200,
                 Status = true,
                 Message = "Registro encontrado.",
-                Data = ReviewDto
+                Data = reviewDto
             };
         }
 
         public async Task<ResponseDto<ReviewDto>> CreateAsync(ReviewCreateDto dto)
         {
-            var ReviewEntity = _mapper.Map<ReviewEntity>(dto);
 
-            _context.Reviews.Add(ReviewEntity);
+             var reviewEntity = _mapper.Map<ReviewEntity>(dto);
+            //____________________________________________________________
+            var userrev = _context.Reviews.Where(x => x.Creator == reviewEntity.Creator);
 
+            int i = 0;
+            await userrev.ForEachAsync(x =>
+            {
+                if (x.Software == reviewEntity.Software)
+                {
+                    i = 1;
+                }
+
+            });
+
+            if (i == 1) {
+
+                return new ResponseDto<ReviewDto>
+                {
+                    StatusCode = 404,
+                    Status = false,
+                    Message = "No se puede ingresar mas de un review.",
+                };
+
+            }
+            //____________________________________________________________
+
+
+            _context.Reviews.Add(reviewEntity);
             await _context.SaveChangesAsync();
-
-            var ReviewDto = _mapper.Map<ReviewDto>(ReviewEntity);
 
             return new ResponseDto<ReviewDto>
             {
                 StatusCode = 201,
                 Status = true,
-                Message = "Registro creado correctamente.",
-                Data = ReviewDto
+                Message = MessagesConstant.CREATE_SUCCESS,
             };
         }
 
         public async Task<ResponseDto<ReviewDto>> EditAsync(ReviewEditDto dto, Guid id)
         {
-            var ReviewEntity = await _context.Reviews.FirstOrDefaultAsync(c => c.Id == id);
-            if (ReviewEntity == null)
+            var reviewEntity = await _context.Reviews.FirstOrDefaultAsync(c => c.Id == id);
+            if (reviewEntity == null)
             {
                 return new ResponseDto<ReviewDto>
                 {
@@ -112,26 +136,51 @@ namespace TiendaSoftware.Services
                     Message = "No se encontro el registro.",
                 };
             }
-            _mapper.Map<ReviewEditDto, ReviewEntity>(dto, ReviewEntity);
-            _context.Reviews.Update(ReviewEntity);
+            _mapper.Map<ReviewEditDto, ReviewEntity>(dto, reviewEntity);
+
+            var userrev = _context.Reviews.Where(x => x.Creator == reviewEntity.Creator);
+
+            int i = 0;
+            await userrev.ForEachAsync(x =>
+            {
+                if (x.Software == reviewEntity.Software)
+                {
+                    i = 1;
+                }
+
+            });
+
+            if (i == 1)
+            {
+
+                return new ResponseDto<ReviewDto>
+                {
+                    StatusCode = 404,
+                    Status = false,
+                    Message = "No se puede ingresar mas de un review.",
+                };
+
+            }
+
+            _context.Reviews.Update(reviewEntity);
             await _context.SaveChangesAsync();
-            var ReviewDto = _mapper.Map<ReviewDto>(ReviewEntity);
+            var reviewDto = _mapper.Map<ReviewDto>(reviewEntity);
 
             return new ResponseDto<ReviewDto>
             {
                 StatusCode = 200,
                 Status = true,
                 Message = "Registro modificado correctamente.",
-                Data = ReviewDto
+                Data = reviewDto
             };
         }
 
         public async Task<ResponseDto<ReviewDto>> DeleteAsync(Guid id)
         {
-            var ReviewEntity = await _context.Reviews
+            var reviewEntity = await _context.Reviews
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            if (ReviewEntity == null)
+            if (reviewEntity == null)
             {
                 return new ResponseDto<ReviewDto>
                 {
@@ -141,7 +190,7 @@ namespace TiendaSoftware.Services
                 };
             }
 
-            _context.Reviews.Remove(ReviewEntity);
+            _context.Reviews.Remove(reviewEntity);
             await _context.SaveChangesAsync();
 
             return new ResponseDto<ReviewDto>

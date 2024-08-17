@@ -1,85 +1,65 @@
 ﻿[
   {
+    "Id": "a1c2e1d3-f1c4-4e1d-9a6f-01ef0f1abe1c",
     "Name": "Productivity Master",
     "Description": "A comprehensive software package designed to boost productivity, including word processors, spreadsheets, and presentation tools.",
     "Price": 149.99,
-    "Publisher": "Tech Innovations Inc.",
-    "Tags": [
-      "Productivity Suite",
-      "Productivity Tool"
-    ]
+    "PublisherId": "e1b7a2a1-10b1-4e6f-9c3f-00df9f5dce6f"
   },
   {
+    "Id": "b2d3f2e4-g2d5-5f2e-b7g6-12fg1g2bcf2d",
     "Name": "Design Pro Studio",
     "Description": "Professional software for creating and editing visual content such as images and illustrations.",
     "Price": 299.99,
-    "Publisher": "Creative Solutions Ltd.",
-    "Tags": [
-      "Graphic Design"
-    ]
+    "PublisherId": "f2a8b3b2-20c2-4e7f-a3d2-11ef0f6dae7f"
   },
   {
+    "Id": "c3e4g3f5-h3e6-6g3f-c8h7-23hg2h3cdg3e",
     "Name": "Secure Cloud Storage",
     "Description": "Advanced cloud storage service providing secure and scalable online data storage accessible from anywhere.",
     "Price": 99.99,
-    "Publisher": "GreenTech Development",
-    "Tags": [
-      "Cloud Storage"
-    ]
+    "PublisherId": "g3c9d4c3-30d3-5f8g-b4e3-22gf1g7ebf8g"
   },
   {
+    "Id": "d4f5h4g6-i4f7-7h4g-d9i8-34ih3i4deg4f",
     "Name": "Web Dev IDE",
     "Description": "An integrated development environment tailored for web development, featuring tools and utilities for efficient programming.",
     "Price": 129.99,
-    "Publisher": "Laura Roberts",
-    "Tags": [
-      "IDE"
-    ]
+    "PublisherId": "h4d0e5d4-40e4-6g9h-c5f4-33hg2h8fcg9h"
   },
   {
+    "Id": "e5g6i5h7-j5g8-8i5h-e0j9-45ji4j5efh5g",
     "Name": "Ultimate Game Engine",
     "Description": "A comprehensive game engine framework for developing video games, including tools for graphics, physics, and game logic.",
     "Price": 499.99,
-    "Publisher": "James Walker",
-    "Tags": [
-      "Game Engine",
-      "Simulation"
-    ]
+    "PublisherId": "i5e1f6e5-50f5-7h0i-d6g5-44ih3i9hdh0i"
   },
   {
+    "Id": "f6h7j6i8-k6h9-9j6i-f1k0-56kj5k6fgj6h",
     "Name": "SafeGuard Antivirus",
     "Description": "Software designed to detect, prevent, and remove malware and viruses, ensuring comprehensive protection for your system.",
     "Price": 49.99,
-    "Publisher": "Samantha Green",
-    "Tags": [
-      "Antivirus"
-    ]
+    "PublisherId": "j6f2g7f6-60g6-8i1j-e7h6-55ji4j0ieij1j"
   },
   {
+    "Id": "g7i8k7j9-l7i0-0k7j-g2l1-67lk6l7ghk7i",
     "Name": "Connect Pro Video Conferencing",
     "Description": "A versatile video conferencing tool for real-time communication and collaboration over the internet, suitable for personal and professional use.",
     "Price": 89.99,
-    "Publisher": "Alpha Tech Solutions",
-    "Tags": [
-      "Video Conferencing"
-    ]
+    "PublisherId": "k7g3h8g7-70h7-9j2k-f8i7-66kj5k1jfkj2k"
   },
   {
+    "Id": "h8j9l8k0-m8j1-1l8k-h3m2-78ml7m8hil8j",
     "Name": "EduTech Learning Suite",
     "Description": "A suite of applications designed to facilitate learning and teaching through interactive content and tools.",
     "Price": 79.99,
-    "Publisher": "Benjamin Lee",
-    "Tags": [
-      "Educational Software"
-    ]
+    "PublisherId": "l8h4i9h8-80i8-0k3l-g9j8-77lk6l2kglk3l"
   },
   {
+    "Id": "i9k0m9l1-n9k2-2m9l-i4n3-89nl8n9ijm9k",
     "Name": "Optimizer Utility Pro",
     "Description": "A system utility tool designed to manage and optimize computer hardware and software, including disk cleanup and system optimization features.",
     "Price": 59.99,
-    "Publisher": "Sophia Turner",
-    "Tags": [
-      "System Utility"
-    ]
+    "PublisherId": "m9i5j0i9-90j9-1l4m-h0k9-88ml7m3lhlm4m"
   }
 ]

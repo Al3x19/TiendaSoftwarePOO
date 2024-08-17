@@ -1,92 +1,62 @@
 ﻿[
   {
+    "Id": "1a2b3c4d-1e2f-4a5b-8c9d-1f2g3h4i5j6k",
     "Name": "Alice's Essentials",
     "Description": "A collection of essential productivity and design tools recommended by AliceJohnson92.",
-    "Creator": "AliceJohnson92",
-    "Software": [
-      "Productivity Master",
-      "Design Pro Studio"
-    ]
+    "UserId": "a1b2c3d4-e5f6-7g8h-9i0j-1k2l3m4n5o6p"
   },
   {
+    "Id": "2b3c4d5e-2f3g-5b6c-9d7e-2g3h4i5j6k7l",
     "Name": "Robert's Security Picks",
     "Description": "Top security software selected by Robert_Smith_45 for keeping your system secure.",
-    "Creator": "Robert_Smith_45",
-    "Software": [
-      "SafeGuard Antivirus",
-      "Secure Cloud Storage"
-    ]
+    "UserId": "b2c3d4e5-f6g7-8h9i-0j1k-2l3m4n5o6p7q"
   },
   {
+    "Id": "3c4d5e6f-3g4h-6c7d-0e8f-3h4i5j6k7l8m",
     "Name": "Maria's Development Suite",
     "Description": "A suite of development tools curated by Maria_Garcia77 for effective coding and game development.",
-    "Creator": "Maria_Garcia77",
-    "Software": [
-      "Web Dev IDE",
-      "Ultimate Game Engine"
-    ]
+    "UserId": "c3d4e5f6-g7h8-9i0j-1k2l-3m4n5o6p7q8r"
   },
   {
+    "Id": "4d5e6f7g-4h5i-7d8e-1f9g-4i5j6k7l8m9n",
     "Name": "David's Game Development Tools",
     "Description": "Recommended software for game development, chosen by DavidLee_2021.",
-    "Creator": "DavidLee_2021",
-    "Software": [
-      "Ultimate Game Engine",
-      "Productivity Master"
-    ]
+    "UserId": "d4e5f6g7-h8i9-0j1k-2l3m-4n5o6p7q8r9s"
   },
   {
+    "Id": "5e6f7g8h-5i6j-8e9f-2g0h-5j6k7l8m9n0o",
     "Name": "Sophia's Learning Resources",
     "Description": "Educational tools and productivity software selected by Sophia_Martinez88 for learning and teaching.",
-    "Creator": "Sophia_Martinez88",
-    "Software": [
-      "EduTech Learning Suite",
-      "Productivity Master"
-    ]
+    "UserId": "e5f6g7h8-i9j0-1k2l-3m4n-5o6p7q8r9s0t"
   },
   {
+    "Id": "6f7g8h9i-6j7k-9f0g-3h1i-6k7l8m9n0o1p",
     "Name": "James's Video Conferencing Solutions",
     "Description": "A list of top video conferencing tools recommended by JamesB_TheGreat for online meetings.",
-    "Creator": "JamesB_TheGreat",
-    "Software": [
-      "Connect Pro Video Conferencing",
-      "Productivity Master"
-    ]
+    "UserId": "f6g7h8i9-j0k1-2l3m-4n5o-6p7q8r9s0t1u"
   },
   {
+    "Id": "7g8h9i0j-7k8l-0g1h-4i2j-7l8m9n0o1p2q",
     "Name": "Olivia's System Utilities",
     "Description": "System optimization tools selected by Olivia_Wilson123 to maintain computer performance.",
-    "Creator": "Olivia_Wilson123",
-    "Software": [
-      "Optimizer Utility Pro",
-      "Secure Cloud Storage"
-    ]
+    "UserId": "g7h8i9j0-k1l2-3m4n-5o6p-7q8r9s0t1u2v"
   },
   {
+    "Id": "8h9i0j1k-8l9m-1h2i-5j3k-8m9n0o1p2q3r",
     "Name": "Michael's Comprehensive Suite",
     "Description": "A set of comprehensive tools for security and productivity chosen by MichaelD_456.",
-    "Creator": "MichaelD_456",
-    "Software": [
-      "SafeGuard Antivirus",
-      "Productivity Master"
-    ]
+    "UserId": "h8i9j0k1-l2m3-4n5o-6p7q-8r9s0t1u2v3w"
   },
   {
+    "Id": "9i0j1k2l-9m0n-2i3j-6k4l-9n0o1p2q3r4s",
     "Name": "Emma's Creative Suite",
     "Description": "Creative software selected by EmmaRodriguez_99 for design and productivity tasks.",
-    "Creator": "EmmaRodriguez_99",
-    "Software": [
-      "Design Pro Studio",
-      "Web Dev IDE"
-    ]
+    "UserId": "i9j0k1l2-m3n4-5o6p-7q8r-9s0t1u2v3w4x"
   },
   {
+    "Id": "0j1k2l3m-0n1o-3j4k-7l5m-0o1p2q3r4s5t",
     "Name": "Liam's Productivity Tools",
     "Description": "A curated list of productivity tools recommended by Liam_Taylor_007 for enhanced efficiency.",
-    "Creator": "Liam_Taylor_007",
-    "Software": [
-      "Productivity Master",
-      "EduTech Learning Suite"
-    ]
+    "UserId": "j0k1l2m3-n4o5-6p7q-8r9s-0t1u2v3w4x5y"
   }
 ]

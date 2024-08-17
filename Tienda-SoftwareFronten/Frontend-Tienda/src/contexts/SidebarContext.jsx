@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 
 //distribuir el estado y las funciones de la barra createContext
-export const sidebarContext = createContext();
+export const SidebarContext = createContext();
 
 const sidebarProvider = ({ children }) => {
   conts[(isOpen, setIsopen)] = useState(false);
@@ -12,10 +12,10 @@ const sidebarProvider = ({ children }) => {
 
   return (
     //<SidebarContext.Provider>: Este es el componente que provee los valores del contexto a los componentes hijos.
-    <sidebarContext.Provider value={{ isOpen, setIsopen, handleCloset }}>
+    <SidebarContext.Provider value={{ isOpen, setIsopen, handleCloset }}>
       {children}
-    </sidebarContext.Provider>
+    </SidebarContext.Provider>
   );
 };
 
-export default header;
+export default sidebarProvider;

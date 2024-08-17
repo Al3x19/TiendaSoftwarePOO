@@ -1,57 +1,71 @@
 ﻿[
   {
+    "id": "d2d5f2b9-7a4b-4c4f-bf3e-0e4f6c7a12b5",
     "name": "Productivity Suite",
     "description": "Comprehensive software packages designed to boost productivity, including word processors, spreadsheets, and presentation tools."
   },
   {
+    "id": "a1c2d3e4-5f6a-4b8c-a1b2-3c4d5e6f7a8b",
     "name": "Antivirus",
     "description": "Software specifically for detecting, preventing, and removing malware and viruses."
   },
   {
+    "id": "b1a2c3d4-5e6f-4a7b-8c9d-0e1f2g3h4i5j",
     "name": "IDE",
     "description": "Integrated Development Environment software that provides comprehensive facilities to programmers for software development."
   },
   {
+    "id": "c2b3d4e5-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
     "name": "Graphic Design",
     "description": "Software used for creating and editing visual content such as images and illustrations."
   },
   {
+    "id": "d3c4e5f6-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
     "name": "Video Conferencing",
     "description": "Software that enables real-time video communication and collaboration over the internet."
   },
   {
+    "id": "e4d5f6g7-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
     "name": "Database Management System",
     "description": "Software used to manage and interact with databases, including relational and NoSQL databases."
   },
   {
+    "id": "f5e6g7h8-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
     "name": "Cloud Storage",
     "description": "Services that provide online data storage accessible from anywhere via the internet."
   },
   {
+    "id": "a6f7g8h9-0j1k-2l3m-4n5o-6p7q8r9s0t1u",
     "name": "Game Engine",
     "description": "Software frameworks used for developing video games, providing tools for graphics, physics, and game logic."
   },
   {
+    "id": "b7g8h9i0-1j2k-3l4m-5n6o-7p8q9r0s1t2u",
     "name": "System Utility",
     "description": "Software designed to manage and tune computer hardware and software, such as disk cleanup tools and system optimizers."
   },
   {
+    "id": "c8h9i0j1-2k3l-4m5n-6o7p-8q9r0s1t2u3v",
     "name": "Educational Software",
     "description": "Applications designed to facilitate learning and teaching through interactive content and tools."
   },
   {
+    "id": "d9i0j1k2-3l4m-5n6o-7p8q-9r0s1t2u3v4w",
     "name": "Addon",
     "description": "Supplementary software that extends the functionality of existing programs or games."
   },
   {
+    "id": "e0j1k2l3-4m5n-6o7p-8q9r-0s1t2u3v4w5x",
     "name": "Simulation",
     "description": "Software that models real-world processes or systems for analysis, training, or entertainment."
   },
   {
+    "id": "f1k2l3m4-5n6o-7p8q-9r0s-1t2u3v4w5x6y",
     "name": "Video Game",
     "description": "Interactive entertainment software designed for gaming, including genres like action, strategy, and role-playing."
   },
   {
+    "id": "g2l3m4n5-6o7p-8q9r-0s1t-2u3v4w5x6y7z",
     "name": "Productivity Tool",
     "description": "Specific tools aimed at enhancing productivity, such as task managers and calendar applications."
   }

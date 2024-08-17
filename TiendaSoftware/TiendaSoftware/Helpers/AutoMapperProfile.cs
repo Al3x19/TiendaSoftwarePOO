@@ -12,7 +12,9 @@ namespace TiendaSoftware.Helpers
         public AutoMapperProfile()
         {
             MapsForPublishers();
-
+            MapsForSoftwares();
+            MapsForUsers();
+            MapsForLists();
         }
 
         private void MapsForPublishers()

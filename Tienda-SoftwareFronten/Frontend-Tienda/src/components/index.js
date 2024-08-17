@@ -1,2 +1,2 @@
-export * from "./header"
-export * from "./navbar"
+export * from "./Header"
+export * from "./Navbar"

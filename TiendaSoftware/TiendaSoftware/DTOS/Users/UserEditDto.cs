@@ -20,6 +20,5 @@ namespace TiendaSoftware.DTOS.Users
         [Column("securitycode")]
         public string Securitycode { get; set; }
 
-        public virtual List<string> PurchaseList { get; set; }
     }
 }

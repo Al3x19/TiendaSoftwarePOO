@@ -19,6 +19,6 @@ public class ListCreateDto
 
     public Guid UserId { get; set; }
 
-    public List<string> Softwares { get; set; }
+    public List<string> SoftwaresList { get; set; }
 
 }

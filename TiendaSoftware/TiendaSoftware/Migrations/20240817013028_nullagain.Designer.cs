@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TiendaSoftware.DataBase;
 
@@ -11,9 +12,11 @@ using TiendaSoftware.DataBase;
 namespace TiendaSoftware.Migrations
 {
     [DbContext(typeof(TiendaSoftwareContext))]
-    partial class TiendaSoftwareContextModelSnapshot : ModelSnapshot
+    [Migration("20240817013028_nullagain")]
+    partial class nullagain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

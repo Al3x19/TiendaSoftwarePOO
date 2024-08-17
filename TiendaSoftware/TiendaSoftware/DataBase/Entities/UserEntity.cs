@@ -21,6 +21,6 @@ namespace TiendaSoftware.DataBase.Entities
 
         //public virtual IEnumerable<ReviewEntity> Reseñas { get; set; }
         //public virtual IEnumerable<ListEntity> Listas { get; set; }
-        public virtual IEnumerable<UserDownloadsEntity> Compras { get; set; }
+
     }
 }

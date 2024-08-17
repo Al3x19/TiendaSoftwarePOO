@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 
-const navbar = () => {
-  const location = useLocation();
+export const Navbar = () => {
+  const  location = useLocation();
   const { pathname } = location;
+  
   return (
     <nav className="flex items-center gap-3 font-medium text-primary">
       <Link
@@ -17,7 +18,7 @@ const navbar = () => {
         className={`${
           pathname === "/about" && "text-red-600"
         } hover:text-red-600 transition`}
-        to={"/about"}
+        to={"../pages/HomePage.jsx"}
       >
         Nosotros
       </Link>
@@ -25,7 +26,7 @@ const navbar = () => {
         className={`${
           pathname === "/products" && "text-red-600"
         } hover:text-red-600 transition`}
-        to={"/products"}
+        to={"../pages/SoftwarePage.jsx"}
       >
         Productos
       </Link>
@@ -33,7 +34,7 @@ const navbar = () => {
         className={`${
           pathname === "/contact" && "text-red-600"
         } hover:text-red-600 transition`}
-        to={"/contact"}
+        to={"../pages/LoginPage.jsx"}
       >
         Login
       </Link>
@@ -41,7 +42,7 @@ const navbar = () => {
         className={`${
           pathname === "/contact" && "text-red-600"
         } hover:text-red-600 transition`}
-        to={"/contact"}
+        to={"#"}
       >
         Contáctanos
       </Link>

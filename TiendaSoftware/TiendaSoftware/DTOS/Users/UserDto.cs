@@ -12,6 +12,5 @@ namespace TiendaSoftware.DTOS.Users
 
         public string Securitycode { get; set; }
 
-        public List<string> Compras { get; set; }
     }
 }
