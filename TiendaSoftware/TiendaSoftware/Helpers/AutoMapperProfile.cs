@@ -2,6 +2,7 @@
 using TiendaSoftware.DataBase.Entities;
 using TiendaSoftware.DTOS.Lists;
 using TiendaSoftware.DTOS.Publishers;
+using TiendaSoftware.DTOS.Reviews;
 using TiendaSoftware.DTOS.Softwares;
 using TiendaSoftware.DTOS.Users;
 
@@ -33,7 +34,7 @@ namespace TiendaSoftware.Helpers
 
         private void MapsForUsers()
         {
-            CreateMap<UserEntity, UserDto>().ForMember(destino => destino.Compras, opt => opt.MapFrom(src => src.Compras.Select(pt => pt.Software.Name).ToList()));
+            CreateMap<UserEntity, UserDto>();
             CreateMap<UserCreateDto, UserEntity>();
             CreateMap<UserEditDto, UserEntity>();
         }
@@ -45,6 +46,12 @@ namespace TiendaSoftware.Helpers
             CreateMap<ListEditDto, ListEntity>();
         }
 
+        private void MapsForReviews()
+        {
+            CreateMap<ReviewEntity, ReviewDto>();
+            CreateMap<ReviewCreateDto, ReviewEntity>();
+            CreateMap<ReviewEditDto, ReviewEntity>();
+        }
 
     }
 }

@@ -6,6 +6,7 @@ using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.DTOS.Softwares;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using TiendaSoftware.DTOS.Reviews;
 
 namespace BlogUNAH.API.Services
 {
@@ -92,6 +93,23 @@ namespace BlogUNAH.API.Services
                 try
                 {
                     var softwareEntity = _mapper.Map<SoftwareEntity>(dto);
+
+
+                    var userrev = _context.Software.Where(x => x.Name == softwareEntity.Name);
+
+
+                    if (!(userrev is null))
+                    {
+
+                        return new ResponseDto<SoftwareDto>
+                        {
+                            StatusCode = 404,
+                            Status = false,
+                            Message = "El nombre ya fue tomado.",
+                        };
+
+                    }
+
 
 
                     _context.Software.Add(softwareEntity);

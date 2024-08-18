@@ -88,10 +88,10 @@ namespace TiendaSoftware.Services
 
              var reviewEntity = _mapper.Map<ReviewEntity>(dto);
             //____________________________________________________________
-            var userrev = _context.Reviews.Where(x => x.Creator == reviewEntity.Creator);
+            var userrev = _context.Reviews.Where(x => x.Creator == reviewEntity.Creator).ToList();
 
             int i = 0;
-            await userrev.ForEachAsync(x =>
+             userrev.ForEach(x =>
             {
                 if (x.Software == reviewEntity.Software)
                 {
