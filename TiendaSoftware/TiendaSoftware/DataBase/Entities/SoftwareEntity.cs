@@ -12,6 +12,11 @@ namespace TiendaSoftware.DataBase.Entities
         [Column("name")]
         public string Name { get; set; }
 
+        [Display(Name = "Imagen")]
+
+        [Column("imagen")]
+        public string img { get; set; }
+
         [Display(Name = "Descripción")]
         [MinLength(10, ErrorMessage = "La {0} debe tener al menos {1} caracteres.")]
         [StringLength(500)]

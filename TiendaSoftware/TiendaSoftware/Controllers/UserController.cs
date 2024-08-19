@@ -1,63 +1,84 @@
-﻿using TiendaSoftware.DataBase.Entities;
+﻿using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.DTOS.Users;
-using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TiendaSoftware.Controllers
 {
-    [ApiController]
     [Route("api/users")]
-    public class UserController : ControllerBase
+    [ApiController]
+    public class UsersController : ControllerBase
     {
         private readonly IUserService _usersService;
 
-        public List<UserEntity> _users { get; set; }
-
-        public UserController(IUserService usersService)
+        public UsersController(IUserService usersService)
         {
             this._usersService = usersService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<ResponseDto<List<UserDto>>>> GetAll()
+        public async Task<ActionResult<ResponseDto<PaginationDto<List<UserDto>>>>> PaginationList(
+            string searchTerm, int page = 1)
         {
-            var response = await _usersService.GetUsersListAsync();
+            var response = await _usersService.GetUsersListAsync(searchTerm, page);
 
-            return StatusCode(response.StatusCode, response);
+            return StatusCode(response.StatusCode, new
+            {
+                response.Status,
+                response.Message,
+                response.Data
+            });
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ResponseDto<UserDto>>> Get(Guid id)
+        public async Task<ActionResult<ResponseDto<UserDto>>> GetOneById(Guid id)
         {
             var response = await _usersService.GetUserByIdAsync(id);
 
-            return StatusCode(response.StatusCode, response);
+            return StatusCode(response.StatusCode, new
+            {
+                response.Status,
+                response.Message,
+                response.Data
+            });
         }
+
         [HttpPost]
         public async Task<ActionResult<ResponseDto<UserDto>>> Create(UserCreateDto dto)
         {
             var response = await _usersService.CreateAsync(dto);
 
-            return StatusCode(response.StatusCode, response);
-
+            return StatusCode(response.StatusCode, new
+            {
+                response.Status,
+                response.Message,
+            });
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ResponseDto<List<UserDto>>>> Edit(UserEditDto dto, Guid id)
+        public async Task<ActionResult<ResponseDto<UserDto>>> Edit(UserEditDto dto,
+            Guid id)
         {
             var response = await _usersService.EditAsync(dto, id);
 
-            return StatusCode(response.StatusCode, response);
+            return StatusCode(response.StatusCode, new
+            {
+                response.Status,
+                response.Message,
+            });
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<ResponseDto<UserDto>>> Delete(Guid id)
         {
-            var category = await _usersService.GetUserByIdAsync(id);
             var response = await _usersService.DeleteAsync(id);
 
-            return StatusCode(response.StatusCode, response);
+            return StatusCode(response.StatusCode, new
+            {
+                response.Status,
+                response.Message,
+            });
         }
     }
 }

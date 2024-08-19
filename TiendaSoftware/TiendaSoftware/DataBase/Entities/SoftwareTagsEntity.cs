@@ -7,18 +7,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TiendaSoftware.DataBase.Entities;
 [Table("software_tags", Schema = "dbo")]
 public class SoftwareTagsEntity : BaseEntity
-{         
-         
-        [Column("Software_id")]
-        public Guid SoftwareId { get; set; }
+{
 
-        [ForeignKey(nameof(SoftwareId))]
-        public virtual SoftwareEntity Software { get; set; }
+    [Column("Software_id")]
+    public Guid SoftwareId { get; set; }
 
-        [Column("Tag_id")]
-        public Guid TagId { get; set; }
-        
-        [ForeignKey(nameof(TagId))]
-        public virtual TagEntity tags { get; set; }
+    [ForeignKey(nameof(SoftwareId))]
+    public virtual SoftwareEntity Software { get; set; }
+
+    [Column("Tag_id")]
+    public Guid TagId { get; set; }
+
+    [ForeignKey(nameof(TagId))]
+    public virtual TagEntity tags { get; set; }
 
 }

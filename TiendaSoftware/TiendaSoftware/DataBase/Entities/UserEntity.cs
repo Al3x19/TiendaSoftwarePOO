@@ -15,7 +15,7 @@ namespace TiendaSoftware.DataBase.Entities
 
         [Display(Name = "Datos bancarios")]
         [Required(ErrorMessage = "Los {0} de la categoría es requerido.")]
-        [StringLength(16)]
+
         [Column("securitycode")]
         public string Securitycode { get; set; }
 

@@ -7,7 +7,7 @@ using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using TiendaSoftware.DTOS.Users;
 using TiendaSoftware.Constansts;
-using TiendaSoftware.DTOS.Lists;
+using TiendaSoftware.DTOS.Reviews;
 
 namespace TiendaSoftware.Services
 {
@@ -28,32 +28,39 @@ namespace TiendaSoftware.Services
         {
             int startIndex = (page - 1) * PAGE_SIZE;
 
-            var ReviewsEntityQuery = _context.Reviews
-                .Where(x => x.Content.ToLower().Contains(searchTerm.ToLower()));
+            // Start with the base query
+            var reviewEntityQuery = _context.Reviews
+                .Include(x => x.Creator).AsQueryable();
 
-            int totalReviews = await ReviewsEntityQuery.CountAsync();
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                reviewEntityQuery = reviewEntityQuery
+                    .Where(x => (x.Creator + " " + x.Creator.Name + " " + x.Content)
+                    .ToLower().Contains(searchTerm.ToLower()));
+            }
+            int totalReviews = await reviewEntityQuery.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalReviews / PAGE_SIZE);
 
-            var ReviewsEntity = await ReviewsEntityQuery
-                .OrderBy(u => u.Content)
+            var reviewsEntity = await reviewEntityQuery
+                .OrderByDescending(x => x.CreatedDate)
                 .Skip(startIndex)
                 .Take(PAGE_SIZE)
-                .ToListAsync();
+            .ToListAsync();
 
-            var ReviewsDtos = _mapper.Map<List<ReviewDto>>(ReviewsEntity);
+            var reviewDto = _mapper.Map<List<ReviewDto>>(reviewsEntity);
 
             return new ResponseDto<PaginationDto<List<ReviewDto>>>
             {
                 StatusCode = 200,
                 Status = true,
-                Message = "Registros Encontrados",
+                Message = MessagesConstant.RECORDS_FOUND,
                 Data = new PaginationDto<List<ReviewDto>>
                 {
                     CurrentPage = page,
                     PageSize = PAGE_SIZE,
                     TotalItems = totalReviews,
                     TotalPages = totalPages,
-                    Items = ReviewsDtos,
+                    Items = reviewDto,
                     HasPreviousPage = page > 1,
                     HasNextPage = page < totalPages,
                 }
@@ -86,21 +93,13 @@ namespace TiendaSoftware.Services
         public async Task<ResponseDto<ReviewDto>> CreateAsync(ReviewCreateDto dto)
         {
 
-             var reviewEntity = _mapper.Map<ReviewEntity>(dto);
+            var reviewEntity = _mapper.Map<ReviewEntity>(dto);
             //____________________________________________________________
-            var userrev = _context.Reviews.Where(x => x.Creator == reviewEntity.Creator).ToList();
+            var userrev = await _context.Reviews.AnyAsync(x => x.Creator == reviewEntity.Creator && x.Software == reviewEntity.Software);
 
-            int i = 0;
-             userrev.ForEach(x =>
+
+            if (userrev)
             {
-                if (x.Software == reviewEntity.Software)
-                {
-                    i = 1;
-                }
-
-            });
-
-            if (i == 1) {
 
                 return new ResponseDto<ReviewDto>
                 {
@@ -138,19 +137,10 @@ namespace TiendaSoftware.Services
             }
             _mapper.Map<ReviewEditDto, ReviewEntity>(dto, reviewEntity);
 
-            var userrev = _context.Reviews.Where(x => x.Creator == reviewEntity.Creator);
+            var userrev = _context.Reviews.AnyAsync(x => x.Creator == reviewEntity.Creator && x.Software == reviewEntity.Software);
 
-            int i = 0;
-            await userrev.ForEachAsync(x =>
-            {
-                if (x.Software == reviewEntity.Software)
-                {
-                    i = 1;
-                }
 
-            });
-
-            if (i == 1)
+            if ((bool)userrev.AsyncState)
             {
 
                 return new ResponseDto<ReviewDto>
@@ -161,7 +151,6 @@ namespace TiendaSoftware.Services
                 };
 
             }
-
             _context.Reviews.Update(reviewEntity);
             await _context.SaveChangesAsync();
             var reviewDto = _mapper.Map<ReviewDto>(reviewEntity);

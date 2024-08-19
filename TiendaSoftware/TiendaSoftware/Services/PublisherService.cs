@@ -6,6 +6,7 @@ using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.DTOS.Publishers;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using TiendaSoftware.DTOS.Lists;
 
 namespace TiendaSoftware.Services
 {
@@ -24,38 +25,48 @@ namespace TiendaSoftware.Services
 
         public async Task<ResponseDto<PaginationDto<List<PublisherDto>>>> GetPublishersListAsync(string searchTerm = "", int page = 1)
         {
+   
             int startIndex = (page - 1) * PAGE_SIZE;
 
-            var PublishersEntityQuery = _context.Publishers
-                .Where(x => x.Description.ToLower().Contains(searchTerm.ToLower()));
+            // Start with the base query
+            var publisherEntityQuery = _context.Publishers.AsQueryable();
 
-            int totalPublishers = await PublishersEntityQuery.CountAsync();
+            // Apply search filter if searchTerm is provided
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                var normalizedSearchTerm = searchTerm.ToLower();
+                publisherEntityQuery = publisherEntityQuery.Where(x =>
+                    (x.Name + " " + x.Description).ToLower().Contains(normalizedSearchTerm)
+                );
+            }
+            int totalPublishers = await publisherEntityQuery.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalPublishers / PAGE_SIZE);
 
-            var PublishersEntity = await PublishersEntityQuery
-                .OrderBy(u => u.Description)
+            var postsEntity = await publisherEntityQuery
+                .OrderByDescending(x => x.CreatedDate)
                 .Skip(startIndex)
                 .Take(PAGE_SIZE)
-                .ToListAsync();
+            .ToListAsync();
 
-            var PublishersDtos = _mapper.Map<List<PublisherDto>>(PublishersEntity);
+            var postsDto = _mapper.Map<List<PublisherDto>>(postsEntity);
 
             return new ResponseDto<PaginationDto<List<PublisherDto>>>
             {
                 StatusCode = 200,
                 Status = true,
-                Message = "Registros Encontrados",
+                Message = MessagesConstant.RECORDS_FOUND,
                 Data = new PaginationDto<List<PublisherDto>>
                 {
                     CurrentPage = page,
                     PageSize = PAGE_SIZE,
                     TotalItems = totalPublishers,
                     TotalPages = totalPages,
-                    Items = PublishersDtos,
+                    Items = postsDto,
                     HasPreviousPage = page > 1,
                     HasNextPage = page < totalPages,
                 }
             };
+
 
         }
         public async Task<ResponseDto<PublisherDto>> GetPublisherByIdAsync(Guid id)

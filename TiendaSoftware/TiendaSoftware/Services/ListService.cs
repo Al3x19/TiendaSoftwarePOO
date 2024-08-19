@@ -6,6 +6,7 @@ using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.DTOS.Lists;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using TiendaSoftware.DTOS.Publishers;
 
 namespace BlogUNAH.API.Services
 {
@@ -26,38 +27,49 @@ namespace BlogUNAH.API.Services
 
         public async Task<ResponseDto<PaginationDto<List<ListDto>>>> GetListAsync(string searchTerm = "", int page = 1)
         {
+
             int startIndex = (page - 1) * PAGE_SIZE;
 
-            var ListEntityQuery = _context.Lists.Include(x => x.Creator).Include(x => x.Softwares).ThenInclude(x => x.Software).Where(x => (x.Name + " " + x.Creator.Name + " " + x.Description).ToLower().Contains(searchTerm.ToLower()));
+            // Start with the base query
+            var listEntityQuery = _context.Lists
+                .Include(x => x.Creator)
+                .Include(x => x.Softwares)
+                .ThenInclude(x => x.Software).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                ListEntityQuery = ListEntityQuery.Where(x => (x.Name + " " + x.Creator.Name + " " + x.Description).ToLower().Contains(searchTerm.ToLower()));
+                listEntityQuery = listEntityQuery
+                    .Where(x => (x.Name + " " + x.Creator.Name + " " + x.Description)
+                    .ToLower().Contains(searchTerm.ToLower()));
             }
+            int totalLists = await listEntityQuery.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalLists / PAGE_SIZE);
 
-            int totalList = await ListEntityQuery.CountAsync();
-            int totalPages = (int)Math.Ceiling((double)totalList / PAGE_SIZE);
+            var listsEntity = await listEntityQuery
+                .OrderByDescending(x => x.CreatedDate)
+                .Skip(startIndex)
+                .Take(PAGE_SIZE)
+            .ToListAsync();
 
-            var listEntity = await ListEntityQuery.OrderByDescending(x => x.CreatedDate).Skip(startIndex).Take(PAGE_SIZE).ToListAsync();
-
-            var listDto = _mapper.Map<List<ListDto>>(listEntity);
+            var listDto = _mapper.Map<List<ListDto>>(listsEntity);
 
             return new ResponseDto<PaginationDto<List<ListDto>>>
             {
                 StatusCode = 200,
                 Status = true,
-                Message = "Registro encontrado",
+                Message = MessagesConstant.RECORDS_FOUND,
                 Data = new PaginationDto<List<ListDto>>
                 {
                     CurrentPage = page,
                     PageSize = PAGE_SIZE,
-                    TotalItems = totalList,
+                    TotalItems = totalLists,
                     TotalPages = totalPages,
                     Items = listDto,
                     HasPreviousPage = page > 1,
                     HasNextPage = page < totalPages,
                 }
             };
+
         }
 
         public async Task<ResponseDto<ListDto>> GetByIdAsync(Guid id)
@@ -74,7 +86,7 @@ namespace BlogUNAH.API.Services
                 };
             }
 
-            var listDto = _mapper.Map<ListDto>(ListEntity);
+            var listDto = _mapper.Map<ListDto>(listEntity);
 
             return new ResponseDto<ListDto>
             {
@@ -92,18 +104,24 @@ namespace BlogUNAH.API.Services
                 try
                 {
                     var ListEntity = _mapper.Map<ListEntity>(dto);
+                    var existingsoft = await _context.Software.Where(t => dto.SoftwaresList.Contains(t.Name)).ToListAsync();
+
+                    if (existingsoft.Count() != dto.SoftwaresList.Count())
+                    {
+                        return new ResponseDto<ListDto>
+                        {
+                            StatusCode = 400,
+                            Status = false,
+                            Message = "Se intento agregar un software no existente"
+                        };
+                    }
+
 
 
                     _context.Lists.Add(ListEntity);
                     await _context.SaveChangesAsync();
 
 
-                    var existingsoft = await _context.Software.Where(t => dto.SoftwaresList.Contains(t.Name)).ToListAsync();
-
-                     if (existingsoft.Count() != dto.SoftwaresList.Count())
-                        {
-                        throw new Exception("Error, se intento agregar un producto no existente");
-                        }
 
 
 
@@ -148,20 +166,37 @@ namespace BlogUNAH.API.Services
             {
                 try
                 {
-                    var ListEntity = _mapper.Map<ListEntity>(dto);
 
 
-                    _context.Lists.Update(ListEntity);
-                    await _context.SaveChangesAsync();
+                    var ListEntity = await _context.Lists.FindAsync(id);
+
+                    if (ListEntity is null)
+                    {
+                        return new ResponseDto<ListDto>
+                        {
+                            StatusCode = 404,
+                            Status = false,
+                            Message = "registro no encontrado"
+                        };
+                    }
+
+
 
 
                     var existingsoft = await _context.Software.Where(t => dto.SoftwaresList.Contains(t.Name)).ToListAsync();
 
                     if (existingsoft.Count() != dto.SoftwaresList.Count())
                     {
-                        throw new Exception("Error, se intento agregar un producto no existente");
+                        return new ResponseDto<ListDto>
+                        {
+                            StatusCode = 400,
+                            Status = false,
+                            Message = "Se intento agregar un software no existente"
+                        };
                     }
 
+                    _context.Lists.Update(ListEntity);
+                    await _context.SaveChangesAsync();
 
 
 

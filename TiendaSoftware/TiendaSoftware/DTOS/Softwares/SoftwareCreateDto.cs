@@ -25,6 +25,9 @@ namespace TiendaSoftware.DTOS.Softwares
 
         public float Price { get; set; }
 
+        [Display(Name = "Imagen")]
+        public string img { get; set; }
+
 
         public Guid PublisherId { get; set; }
 

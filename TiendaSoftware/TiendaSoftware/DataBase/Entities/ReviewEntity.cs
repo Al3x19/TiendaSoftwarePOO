@@ -15,7 +15,8 @@ namespace TiendaSoftware.DataBase.Entities
 
         [Display(Name = "Puntuacion")]
         [Required(ErrorMessage = "La {0} de la categoría es requerido.")]
-
+        [Range(0, 100, ErrorMessage = "El valor debe estar entre 0 y 100.")]
+        [Column("score")]
 
         public int Score { get; set; }
 

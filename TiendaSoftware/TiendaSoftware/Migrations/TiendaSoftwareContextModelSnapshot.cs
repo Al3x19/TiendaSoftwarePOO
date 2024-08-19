@@ -140,8 +140,7 @@ namespace TiendaSoftware.Migrations
 
                     b.Property<string>("Securitycode")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("securitycode");
 
                     b.Property<string>("UpdatedBy")
@@ -180,7 +179,8 @@ namespace TiendaSoftware.Migrations
                         .HasColumnName("created_date");
 
                     b.Property<int>("Score")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("score");
 
                     b.Property<Guid>("SoftwareId")
                         .HasColumnType("uniqueidentifier")
@@ -251,6 +251,10 @@ namespace TiendaSoftware.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("update_date");
+
+                    b.Property<string>("img")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("imagen");
 
                     b.HasKey("Id");
 
@@ -408,8 +412,7 @@ namespace TiendaSoftware.Migrations
 
                     b.Property<string>("Securitycode")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("securitycode");
 
                     b.Property<string>("UpdatedBy")
@@ -514,7 +517,7 @@ namespace TiendaSoftware.Migrations
                         .IsRequired();
 
                     b.HasOne("TiendaSoftware.DataBase.Entities.UserEntity", "User")
-                        .WithMany("Compras")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -537,11 +540,6 @@ namespace TiendaSoftware.Migrations
             modelBuilder.Entity("TiendaSoftware.DataBase.Entities.SoftwareEntity", b =>
                 {
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("TiendaSoftware.DataBase.Entities.UserEntity", b =>
-                {
-                    b.Navigation("Compras");
                 });
 #pragma warning restore 612, 618
         }

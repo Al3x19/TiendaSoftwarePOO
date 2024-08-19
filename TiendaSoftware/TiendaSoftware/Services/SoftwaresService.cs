@@ -6,7 +6,7 @@ using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.DTOS.Softwares;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using TiendaSoftware.DTOS.Reviews;
+using TiendaSoftware.DTOS.Softwares;
 
 namespace BlogUNAH.API.Services
 {
@@ -27,21 +27,31 @@ namespace BlogUNAH.API.Services
 
         public async Task<ResponseDto<PaginationDto<List<SoftwareDto>>>> GetListAsync(string searchTerm = "", int page = 1)
         {
+
             int startIndex = (page - 1) * PAGE_SIZE;
 
-            var softwareEntityQuery = _context.Software.Include(x => x.Desarrollador).Include(x => x.Tags).ThenInclude(x => x.tags).Where(x => (x.Name + " " + x.Desarrollador.Name + " " + x.Description).ToLower().Contains(searchTerm.ToLower()));
+            // Start with the base query
+            var softwareEntityQuery = _context.Software
+                .Include(x => x.Desarrollador)
+                .Include(x => x.Tags)
+                .ThenInclude(x => x.tags).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                softwareEntityQuery = softwareEntityQuery.Where(x => (x.Name + " " + x.Desarrollador.Name + " " + x.Description).ToLower().Contains(searchTerm.ToLower()));
+                softwareEntityQuery = softwareEntityQuery
+                    .Where(x => (x.Desarrollador + " " + x.Desarrollador.Name + " " + x.Description)
+                    .ToLower().Contains(searchTerm.ToLower()));
             }
+            int totalSoftwares = await softwareEntityQuery.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalSoftwares / PAGE_SIZE);
 
-            int totalSoftware = await softwareEntityQuery.CountAsync();
-            int totalPages = (int)Math.Ceiling((double)totalSoftware / PAGE_SIZE);
+            var softwaresEntity = await softwareEntityQuery
+                .OrderByDescending(x => x.CreatedDate)
+                .Skip(startIndex)
+                .Take(PAGE_SIZE)
+            .ToListAsync();
 
-            var softwareEntity = await softwareEntityQuery.OrderByDescending(x => x.CreatedDate).Skip(startIndex).Take(PAGE_SIZE).ToListAsync();
-
-            var softwareDto = _mapper.Map<List<SoftwareDto>>(softwareEntity);
+            var softwareDto = _mapper.Map<List<SoftwareDto>>(softwaresEntity);
 
             return new ResponseDto<PaginationDto<List<SoftwareDto>>>
             {
@@ -52,13 +62,14 @@ namespace BlogUNAH.API.Services
                 {
                     CurrentPage = page,
                     PageSize = PAGE_SIZE,
-                    TotalItems = totalSoftware,
+                    TotalItems = totalSoftwares,
                     TotalPages = totalPages,
                     Items = softwareDto,
                     HasPreviousPage = page > 1,
                     HasNextPage = page < totalPages,
                 }
             };
+
         }
 
         public async Task<ResponseDto<SoftwareDto>> GetByIdAsync(Guid id)
@@ -94,22 +105,8 @@ namespace BlogUNAH.API.Services
                 {
                     var softwareEntity = _mapper.Map<SoftwareEntity>(dto);
 
-
-                    var userrev = _context.Software.Where(x => x.Name == softwareEntity.Name);
-
-
-                    if (!(userrev is null))
-                    {
-
-                        return new ResponseDto<SoftwareDto>
-                        {
-                            StatusCode = 404,
-                            Status = false,
-                            Message = "El nombre ya fue tomado.",
-                        };
-
-                    }
-
+                    //____________________________________________________________
+                    //____________________________________________________________
 
 
                     _context.Software.Add(softwareEntity);
@@ -183,7 +180,7 @@ namespace BlogUNAH.API.Services
                         {
                             StatusCode = 404,
                             Status = false,
-                            Message = $"{MessagesConstant.RECORD_NOT_FOUND} {id}"
+                            Message = "registro no encontrado"
                         };
                     }
 
@@ -271,6 +268,12 @@ namespace BlogUNAH.API.Services
                             Message = $"{MessagesConstant.RECORD_NOT_FOUND}"
                         };
                     }
+
+
+                    //____________________________________________________________
+
+                    //____________________________________________________________
+
 
                     _context.Software.Remove(softwareEntity);
                     await transaction.CommitAsync();

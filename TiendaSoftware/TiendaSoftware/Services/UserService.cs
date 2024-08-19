@@ -5,6 +5,8 @@ using TiendaSoftware.DTOS.Users;
 using TiendaSoftware.DTOS.Common;
 using TiendaSoftware.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using TiendaSoftware.Constansts;
+using TiendaSoftware.DTOS.Users;
 
 namespace TiendaSoftware.Services
 {
@@ -25,36 +27,46 @@ namespace TiendaSoftware.Services
         {
             int startIndex = (page - 1) * PAGE_SIZE;
 
-            var UsersEntityQuery = _context.Users
-                .Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()));
+            // Start with the base query
+            var userEntityQuery = _context.Users.AsQueryable();
 
-            int totalUsers = await UsersEntityQuery.CountAsync();
+            // Apply search filter if searchTerm is provided
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                var normalizedSearchTerm = searchTerm.ToLower();
+                userEntityQuery = userEntityQuery.Where(x =>
+                    (x.Name ).ToLower().Contains(normalizedSearchTerm)
+                );
+            }
+            int totalUsers = await userEntityQuery.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalUsers / PAGE_SIZE);
 
-            var UsersEntity = await UsersEntityQuery
-                .OrderBy(u => u.Name)
+            var postsEntity = await userEntityQuery
+                .OrderByDescending(x => x.CreatedDate)
                 .Skip(startIndex)
                 .Take(PAGE_SIZE)
-                .ToListAsync();
+            .ToListAsync();
 
-            var UsersDtos = _mapper.Map<List<UserDto>>(UsersEntity);
+            var postsDto = _mapper.Map<List<UserDto>>(postsEntity);
 
             return new ResponseDto<PaginationDto<List<UserDto>>>
             {
                 StatusCode = 200,
                 Status = true,
-                Message = "Registros Encontrados",
+                Message = MessagesConstant.RECORDS_FOUND,
                 Data = new PaginationDto<List<UserDto>>
                 {
                     CurrentPage = page,
                     PageSize = PAGE_SIZE,
                     TotalItems = totalUsers,
                     TotalPages = totalPages,
-                    Items = UsersDtos,
+                    Items = postsDto,
                     HasPreviousPage = page > 1,
                     HasNextPage = page < totalPages,
                 }
             };
+
+
 
         }
         public async Task<ResponseDto<UserDto>> GetUserByIdAsync(Guid id)
@@ -84,6 +96,26 @@ namespace TiendaSoftware.Services
         {
             var UserEntity = _mapper.Map<UserEntity>(dto);
 
+            /* //____________________________________________________________
+             var namecheck = _context.Users.Where(x => x.Name == reviewEntity.Name);
+
+
+             if (!(namecheck is null))
+             {
+                 return new ResponseDto<ReviewDto>
+                 {
+                     StatusCode = 400,
+                     Status = false,
+                     Message = "El nombre ya esta en uso.",
+                 };
+             }
+
+         };
+
+         //____________________________________________________________
+ */
+
+
             _context.Users.Add(UserEntity);
 
             await _context.SaveChangesAsync();
@@ -111,6 +143,25 @@ namespace TiendaSoftware.Services
                     Message = "No se encontro el registro.",
                 };
             }
+            /*  //____________________________________________________________
+              var namecheck = _context.Users.Where(x => x.Name == reviewEntity.Name);
+
+
+              if (!(namecheck is null))
+              {
+                  return new ResponseDto<ReviewDto>
+                  {
+                      StatusCode = 400,
+                      Status = false,
+                      Message = "El nombre ya esta en uso.",
+                  };
+              }
+
+          };
+
+          //____________________________________________________________
+          */
+
             _mapper.Map<UserEditDto, UserEntity>(dto, UserEntity);
             _context.Users.Update(UserEntity);
             await _context.SaveChangesAsync();

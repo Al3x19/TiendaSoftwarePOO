@@ -24,18 +24,31 @@ namespace TiendaSoftware
             services.AddSwaggerGen();
             // Add DbContext
 
-            services.AddDbContext<TiendaSoftwareContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<TiendaSoftwareContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging());
 
             // Add custom services
             services.AddTransient<IPublisherService, PublisherService>();
             services.AddTransient<ISoftwaresService, SoftwaresService>();
             services.AddTransient<IListsService, ListsService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IAuthService, AuthService>(); // servicio de autentificacion
 
             // Add AutoMapper
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
+
+            // CORS Configuration
+            services.AddCors(opt =>
+            {
+                var allowURLS = Configuration.GetSection("AllowURLS").Get<string[]>();
+
+                opt.AddPolicy("CorsPolicy", builder => builder
+                .WithOrigins(allowURLS)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            });
 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -48,6 +61,8 @@ namespace TiendaSoftware
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

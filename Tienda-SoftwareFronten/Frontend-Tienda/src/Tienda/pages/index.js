@@ -1,3 +1,5 @@
 export * from './HomePage'
 export * from './LoginPage'
 export * from './SoftwarePage'
+export * from './SoftwareDescription'
+export * from './LoginPublisherPage'

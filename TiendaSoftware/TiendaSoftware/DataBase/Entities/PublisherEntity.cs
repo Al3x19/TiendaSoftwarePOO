@@ -22,7 +22,7 @@ namespace TiendaSoftware.DataBase.Entities
 
         [Display(Name = "Datos bancarios")]
         [Required(ErrorMessage = "Los {0} de la categoría es requerido.")]
-        [StringLength(12)]
+   
         [Column("securitycode")]
         public string Securitycode { get; set; }
 

@@ -15,6 +15,7 @@ namespace TiendaSoftware.Helpers
             MapsForPublishers();
             MapsForSoftwares();
             MapsForUsers();
+            MapsForReviews();
             MapsForLists();
         }
 
