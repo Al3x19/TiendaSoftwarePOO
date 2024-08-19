@@ -64,7 +64,9 @@ export const LoginPublisherPage = () => {
             type="submit"
             className="w-full py-2 px-4 bg-gray-700 text-white rounded-md font-semibold hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 shadow-md"
             disabled={isLoading}
+            
           >
+          
             {isLoading ? "Creating..." : "Create Publisher"}
           </button>
           {publisher && <p className="text-green-500">Publisher created successfully!</p>}

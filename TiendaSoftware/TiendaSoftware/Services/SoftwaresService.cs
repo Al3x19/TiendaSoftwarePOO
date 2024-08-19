@@ -39,7 +39,7 @@ namespace BlogUNAH.API.Services
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 softwareEntityQuery = softwareEntityQuery
-                    .Where(x => (x.Desarrollador + " " + x.Desarrollador.Name + " " + x.Description)
+                    .Where(x => (x.Name + " " + x.Desarrollador.Name + " " + x.Description)
                     .ToLower().Contains(searchTerm.ToLower()));
             }
             int totalSoftwares = await softwareEntityQuery.CountAsync();

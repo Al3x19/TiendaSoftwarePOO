@@ -13,7 +13,6 @@ export const useSoftware = () => {
   };
 
   const loadSingleSoftware = async (id) => {
-
     const result = await getSoftware(id);
     setSoftware(result);
   
